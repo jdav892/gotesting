@@ -1,11 +1,9 @@
 package iteration
 
 func Repeat(char string) string {
-	fill := "a"
-	str := ""
-
+	var repeated string
 	for i := 0; i < 5; i++ {
-		str += fill
+		repeated += char 
 	}
-	return str
+	return repeated 
 }
