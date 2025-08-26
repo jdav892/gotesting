@@ -11,6 +11,15 @@ func TestRepeat(t *testing.T) {
 	}
 }
 
+func TestBucket(t *testing.T) {
+	repeated := Repeater(1)
+	expected := 5
+
+	if repeated != expected {
+		t.Errorf("expected %d and got %d", expected, repeated)
+	}
+}
+
 func BenchmarkRepeat(b *testing.B) {
 	//setup
 	for b.Loop() {
