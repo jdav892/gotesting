@@ -1,9 +1,16 @@
 package structsMethodsInterfaces
 
-func Perimeter(width float64, height float64) float64 {
-	return 2 * (width + height)
+
+type Rectangle struct {
+	Height float64
+	Width float64
 }
 
-func Area(length float64, width float64) float64 {
-	return (length * width)
+
+func Perimeter(rectangle Rectangle) float64 {
+	return 2 * (rectangle.Width + rectangle.Height)
+}
+
+func Area(rectangle Rectangle) float64 {
+	return (rectangle.Height * rectangle.Width)
 }
