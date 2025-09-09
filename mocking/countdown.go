@@ -21,13 +21,16 @@ type SpySleeper struct {
 
 //add new line character to go string for correct terminal output with this function
 const finalWord = "Go!"
-const countDown = 3
+const countDownStart = 3
 
 func Countdown(out io.Writer, sleeper Sleeper){
 	//using for loop to decrement and recreate a countdown
-	for i:= countDown; i > 0; i-- {
-		fmt.Fprintln(out, i)
+	for i := countDownStart; i > 0; i-- {
 		sleeper.Sleep()
+	}
+
+	for i := countDownStart; i > 0; i-- {
+		fmt.Fprintln(out, i)
 	}
 	fmt.Fprint(out, finalWord)
 }
