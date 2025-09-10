@@ -7,6 +7,11 @@ import(
 	"os"
 )
 
+type ConfigurableSleeper struct {
+	duration time.Duration
+	sleep func(time.Duration)
+}
+
 type DefaultSleeper struct {
 
 }
@@ -21,6 +26,10 @@ type SpySleeper struct {
 
 type SpyCountdownOperations struct {
 	Calls []string
+}
+
+type SpyTime struct {
+	durationSlept time.Duration
 }
 
 //add new line character to go string for correct terminal output with this function
@@ -53,6 +62,14 @@ func (s *SpyCountdownOperations) Sleep() {
 func (s *SpyCountdownOperations) Write(p []byte) (n int, err error) {
 	s.Calls = append(s.Calls, write)
 	return
+}
+
+func (s *SpyTime) SetDurationSlept(duration time.Duration) {
+	s.durationSlept = duration
+}
+
+func (c *ConfigurableSleeper) Sleep() {
+	c.sleep(c.duration)
 }
 
 
