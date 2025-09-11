@@ -74,7 +74,7 @@ func (c *ConfigurableSleeper) Sleep() {
 
 
 func main() {
-	sleeper := &DefaultSleeper{}
+	sleeper := &ConfigurableSleeper{1 * time.Second, time.Sleep}
 	Countdown(os.Stdout, sleeper)
 }
 
