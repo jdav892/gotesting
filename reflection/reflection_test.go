@@ -61,6 +61,14 @@ func TestWalk(t *testing.T) {
 			},
 			[]string{"Justin", "Orlando"},
 		},
+		{
+			"slices",
+			[]Profile {
+				{31, "Orlando"},
+				{32, "Deltona"},
+			},
+			[]string{"Orlando", "Deltona"},
+		},
 
 	}
 
