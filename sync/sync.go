@@ -9,6 +9,10 @@ type Counter struct {
 	value int
 }
 
+func NewCounter() *Counter {
+	return &Counter{}
+}
+
 func (c *Counter) Inc() {
 	c.mu.Lock()
 	defer c.mu.Unlock()
@@ -18,3 +22,4 @@ func (c *Counter) Inc() {
 func (c *Counter) Value() int {
 	return c.value
 }
+
