@@ -5,22 +5,19 @@ import (
 )
 
 type RomanNumeral struct {
-	Value int
+	Value  int
 	Symbol string
 }
 
 var allRomanNumerals = []RomanNumeral{
 	{1000, "M"},
+	{900, "CM"},
 	{500, "D"},
+	{400, "CD"},
 	{100, "C"},
+	{90, "XC"},
 	{50, "L"},
-	{49, "XLIX"},
-	{47, "XLVII"},
 	{40, "XL"},
-	{39, "XXXIX"},
-	{20, "XX"},
-	{18, "XVIII"},
-	{14, "XIV"},
 	{10, "X"},
 	{9, "IX"},
 	{5, "V"},
@@ -30,7 +27,7 @@ var allRomanNumerals = []RomanNumeral{
 
 func ConvertToRoman(arabic int) string {
 	var result strings.Builder
-	
+
 	for _, numeral := range allRomanNumerals {
 		for arabic >= numeral.Value {
 			result.WriteString(numeral.Symbol)
