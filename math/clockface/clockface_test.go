@@ -3,8 +3,8 @@ package clockface_test
 import (
 	"testing"
 	"time"
-	
-	"github.com/jdav892/gotesting/blob/main/math/clockface.go"
+
+	"github.com/jdav892/gotesting/math/clockface"
 )
 
 func TestSecondHandAtMidnight(t *testing.T) {
