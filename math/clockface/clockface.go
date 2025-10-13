@@ -14,7 +14,11 @@ type Point struct {
 // SecondHand is the unit vector of the seonc hand of the analogue clock at time 't'
 // represented as a point
 func SecondHand(t time.Time) Point {
-	return Point{150, 60}
+	p := secondHandPoint(t)
+	p = Point{p.X * 90, p.Y * 90}
+	p = Point{p.X, -p.Y}
+	p = Point{p.X + 150, p.Y + 150}
+	return p
 }
 
 func secondsInRadians(t time.Time) float64 {
