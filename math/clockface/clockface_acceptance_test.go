@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jdav892/gotesting"
+	"github.com/jdav892/gotesting/math/clockface"
 )
 
 func TestSecondHandAtMidnight(t *testing.T) {
@@ -28,3 +28,4 @@ func TestSecondHandAt30Seconds(t *testing.T) {
 		t.Errorf("Got %v, wanted %v", got, want)
 	}
 }
+

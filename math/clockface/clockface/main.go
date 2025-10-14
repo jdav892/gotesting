@@ -6,20 +6,21 @@ import (
 	"os"
 	"time"
 
-	"github.com/gotesting"
+	"github.com/jdav892/gotesting/math/clockface"
 )
 
 func main() {
 	t := time.Now()
 	sh := clockface.SecondHand(t)
-	io.WriteString(os.Stdout, svgStart)
-	io.WriteString(os.Stdout, bezel)
-	io.WriteString(os.Stdout, secondHandTag(sh))
-	io.WriteString(os.Stdout, svgEnd)
+	io.WriteString(os.Stdout, svgStart+"\n")
+	io.WriteString(os.Stdout, bezel+"\n")
+	io.WriteString(os.Stdout, secondHandTag(sh)+"\n")
+	io.WriteString(os.Stdout, svgEnd+"\n")
 }
 
 func secondHandTag(p clockface.Point) string {
-	return fmt.Sprintf(`<line x1="150" y1="150" x2="%f" y2="%f" style="fill:none;stroke:#f00;stroke-width:3px;">`, p.X, p.Y)
+	// format to 2 decimal places and make the tag self-closing
+	return fmt.Sprintf(`<line x1="150" y1="150" x2="%.2f" y2="%.2f" style="fill:none;stroke:#f00;stroke-width:3px;"/>`, p.X, p.Y)
 }
 
 const svgStart = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
