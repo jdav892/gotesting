@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jdav892/gotesting/math/clockface"
+	"github.com/jdav892/gotesting"
 )
 
 func TestSecondHandAtMidnight(t *testing.T) {
