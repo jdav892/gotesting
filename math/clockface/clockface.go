@@ -11,6 +11,15 @@ type Point struct {
 	Y float64
 }
 
+const (
+	secondsInHalfClock = 30
+	secondsInClock     = 2 * secondsInHalfClock
+	minutesInHalfClock = 30
+	minutesInClock     = 2 * minutesInHalfClock
+	hoursInHalfClock   = 6
+	hoursInClock       = 2 * hoursInHalfClock
+)
+
 func angleToPoint(angle float64) Point {
 	x := math.Sin(angle)
 	y := math.Cos(angle)
