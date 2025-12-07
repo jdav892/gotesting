@@ -1,7 +1,6 @@
 package blogposts
 
 import (
-	"io"
 	"io/fs"
 	"testing/fstest"
 )
@@ -18,7 +17,7 @@ func NewPostsFromFs(fileSystem fstest.MapFS) ([]Post, error) {
 
 	var posts []Post
 	for _, f := range dir {
-		post, err := getPost(fileSystem, f)
+		post, err := getPost(fileSystem, f.Name())
 		if err != nil {
 			return nil, err // need to clarify for total/single/ignore
 		}
@@ -27,21 +26,11 @@ func NewPostsFromFs(fileSystem fstest.MapFS) ([]Post, error) {
 	return posts, nil
 }
 
-func getPost(fileSystem fs.FS, f fs.DirEntry) (Post, error) {
-	postFile, err := fileSystem.Open(f.Name())
+func getPost(fileSystem fs.FS, fileName string) (Post, error) {
+	postFile, err := fileSystem.Open(fileName)
 	if err != nil {
 		return Post{}, err
 	}
 	defer postFile.Close()
 	return newPost(postFile)
-}
-
-func newPost(postFile fs.File) (Post, error) {
-	postData, err := io.ReadAll(postFile)
-	if err != nil {
-		return Post{}, err
-	}
-
-	post := Post{Title: string(postData)[7:]}
-	return post, nil
 }
