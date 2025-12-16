@@ -9,6 +9,7 @@ type Post struct {
 	Title string
 }
 
+// Come back to this for a real use case
 func NewPostsFromFs(fileSystem fstest.MapFS) ([]Post, error) {
 	dir, err := fs.ReadDir(fileSystem, ".")
 	if err != nil {
