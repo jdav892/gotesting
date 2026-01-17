@@ -6,7 +6,9 @@ import (
 )
 
 type Post struct {
-	Title string
+	Title       string
+	Description string
+	Tags        []string
 }
 
 // Come back to this for a real use case
