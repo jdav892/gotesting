@@ -1,0 +1,4 @@
+github.com/gomarkdown/markdown v0.0.0-20240626202925-2eda941fd024 h1:saBP362Qm7zDdDXqv61kI4rzhmLFq3Z1gx34xpl6cWE=
+github.com/gomarkdown/markdown v0.0.0-20240626202925-2eda941fd024/go.mod h1:JDGcbDT52eL4fju3sZ4TeHGsQwhG9nbDV21aMyhwPoA=
+github.com/quii/learn-go-with-tests v0.0.0-20251217110202-2048c9e7da3e h1:8X5bZhpyXg4ug9QlTxIVPW9Vdsl6VjVYB1gFyKaAe4U=
+github.com/quii/learn-go-with-tests v0.0.0-20251217110202-2048c9e7da3e/go.mod h1:rUhpcyi1ujFfC9dS6nFdFX2pQrj9Jm9fZ8KRtB9P04w=
