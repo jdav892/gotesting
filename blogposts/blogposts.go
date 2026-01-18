@@ -9,6 +9,7 @@ type Post struct {
 	Title       string
 	Description string
 	Tags        []string
+	Body        string
 }
 
 // Come back to this for a real use case
