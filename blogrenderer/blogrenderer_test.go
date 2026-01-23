@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"testing"
 	"io"
-
-	"github.com/jdav892/gotesting/blogrenderer"
+	
+	"github.com/jdav892/gotesting/blogrenderer" // not sure why LSP doesn't like this??
 	"github.com/approvals/go-approval-tests"
 )
 
@@ -44,7 +44,7 @@ func TestRender(t *testing.T) {
 		}
 
 		got := buf.String()
-		want := `<ol><li><a href="/post/hello-world">Hello World</a></li><li><a href="post/hello-world-2">Hello World 2</a></li><ol>`
+		want := `<ol><li><a href="/post/hello-world">Hello World</a></li><li><a href="/post/hello-world-2">Hello World 2</a></li></ol>`
 
 		if got != want {
 			t.Errorf("got %q want %q", got, want)

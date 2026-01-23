@@ -4,6 +4,7 @@ import (
 	"embed"
 	"html/template"
 	"io"
+	"strings"
 )
 
 type Post struct {
@@ -40,8 +41,14 @@ func (r *PostRenderer) Render(w io.Writer, p Post) error {
 }
 
 func (r *PostRenderer) RenderIndex(w io.Writer, posts []Post) error {
-	indexTemplate := `<ol>{{range .}}<li><a href="/post/{{.Title}}">{{.Title}}</a></li>{{end}}</ol>`
-	templ, err := template.New("index").Parse(indexTemplate)
+	indexTemplate := `<ol>{{range .}}<li><a href="/post/{{sanitiseTitle .Title}}">{{.Title}}</a></li>{{end}}</ol>`
+
+	templ, err := template.New("index").Funcs(template.FuncMap{
+		"sanitiseTitle": func(title string) string {
+			// can also use ReplaceAll here?
+			return strings.ToLower(strings.Replace(title, " ", "-", -1))
+		},
+	}).Parse(indexTemplate)
 	if err != nil {
 		return err
 	}
