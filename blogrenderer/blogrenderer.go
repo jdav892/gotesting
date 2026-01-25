@@ -9,20 +9,20 @@ import (
 	"github.com/gomarkdown/markdown/parser"
 )
 
+var (
+	//go:embed "templates/*"
+	postTemplates embed.FS
+)
+
 type PostRenderer struct {
 	templ *template.Template
 	mdParser *parser.Parser
 }
 
 type postViewModel struct {
-	Post	
+	Post
 	HTMLBODY template.HTML
 }
-
-var (
-	//go:embed templates/*
-	postTemplates embed.FS
-)
 
 func NewPostRenderer()(*PostRenderer, error) {
 	templ, err := template.ParseFS(postTemplates, "templates/*.gohtml")
@@ -38,7 +38,7 @@ func NewPostRenderer()(*PostRenderer, error) {
 
 func (r *PostRenderer) Render(w io.Writer, p Post) error {
 
-	return r.templ.ExecuteTemplate(w, "blog.gohtml", p)
+	return r.templ.ExecuteTemplate(w, "blog.gohtml", newPostVM(p, r))
 }
 
 func (r *PostRenderer) RenderIndex(w io.Writer, posts []Post) error {
