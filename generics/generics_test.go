@@ -25,7 +25,7 @@ func AssertTrue(t *testing.T, got bool) {
 
 func AssertFalse(t *testing.T, got bool) {
 	t.Helper()
-	if !got {
+	if got {
 		t.Errorf("got %v, want false", got)
 	}
 }
@@ -44,58 +44,28 @@ func TestAssertFunctions(t *testing.T) {
 
 func TestStack(t *testing.T) {
 	t.Run("integer stack", func(t *testing.T) {
-		myStackOfInts := new(StackOfInts)
+		myStackOfInts := NewStack[int]()
 
-		// check if stack is empty
+		// check stack is empty
 		AssertTrue(t, myStackOfInts.IsEmpty())
 
-		// add smething, then check it's not empty
+		// add a thing, then check if empty
 		myStackOfInts.Push(123)
 		AssertFalse(t, myStackOfInts.IsEmpty())
 
-		// add another thing, pop it back again
+		// add something else, pop it again
 		myStackOfInts.Push(456)
 		value, _ := myStackOfInts.Pop()
 		AssertEqual(t, value, 456)
 		value, _ = myStackOfInts.Pop()
 		AssertEqual(t, value, 123)
 		AssertTrue(t, myStackOfInts.IsEmpty())
-	})
 
-	t.Run("string stack", func(t *testing.T) {
-		myStackOfStrings := new(StackOfStrings)
-
-		// check stack is empty
-		AssertTrue(t, myStackOfStrings.IsEmpty())
-
-		// add a thing, then check it's not empty
-		myStackOfStrings.Push("123")
-		AssertFalse(t, myStackOfStrings.IsEmpty())
-
-		// add another thing then pop it back again
-		myStackOfStrings.Push("456")
-		value, _ := myStackOfStrings.Pop()
-		AssertEqual(t, value, "456")
-		value, _ = myStackOfStrings.Pop()
-		AssertEqual(t, value, "123")
-		AssertTrue(t, myStackOfStrings.IsEmpty())
-	})
-
-	t.Run("interface stack DX is horrid", func(t *testing.T) {
-		myStackOfInts := new(StackOfInts)
-
+		// can get th enumbers we put in as numbers, not untyped interface{}
 		myStackOfInts.Push(1)
 		myStackOfInts.Push(2)
 		firstNum, _ := myStackOfInts.Pop()
 		secondNum, _ := myStackOfInts.Pop()
-
-		// get ints from the interface
-		realFirstNum, ok := firstNum.(int)
-		AssertTrue(t, ok) // need to check to confirm an int
-
-		realSecondNum, ok := secondNum.(int)
-		AssertTrue(t, ok) // again
-
-		AssertEqual(t, realFirstNum+realSecondNum, 3)
+		AssertEqual(t, firstNum+secondNum, 3)
 	})
 }
