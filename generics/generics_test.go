@@ -2,7 +2,14 @@ package generics
 
 import "testing"
 
-func AssertNotEqual[T comparable](t *testing.T, got, want T) {
+func AssertEqual(t *testing.T, got, want interface{}) {
+	t.Helper()
+	if got != want {
+		t.Errorf("got %v, want %v", got, want)
+	}
+}
+
+func AssertNotEqual(t *testing.T, got, want interface{}) {
 	t.Helper()
 	if got == want {
 		t.Errorf("didn't want %v", got)
@@ -33,13 +40,6 @@ func TestAssertFunctions(t *testing.T) {
 		AssertEqual(t, "hello", "hello")
 		AssertNotEqual(t, "hello", "bye")
 	})
-}
-
-func AssertEqual[T comparable](t *testing.T, got, want T) {
-	t.Helper()
-	if got != want {
-		t.Errorf("got %v, want %v", got, want)
-	}
 }
 
 func TestStack(t *testing.T) {
@@ -79,5 +79,23 @@ func TestStack(t *testing.T) {
 		value, _ = myStackOfStrings.Pop()
 		AssertEqual(t, value, "123")
 		AssertTrue(t, myStackOfStrings.IsEmpty())
+	})
+
+	t.Run("interface stack DX is horrid", func(t *testing.T) {
+		myStackOfInts := new(StackOfInts)
+
+		myStackOfInts.Push(1)
+		myStackOfInts.Push(2)
+		firstNum, _ := myStackOfInts.Pop()
+		secondNum, _ := myStackOfInts.Pop()
+
+		// get ints from the interface
+		realFirstNum, ok := firstNum.(int)
+		AssertTrue(t, ok) // need to check to confirm an int
+
+		realSecondNum, ok := secondNum.(int)
+		AssertTrue(t, ok) // again
+
+		AssertEqual(t, realFirstNum+realSecondNum, 3)
 	})
 }
