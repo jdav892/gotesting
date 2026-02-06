@@ -28,3 +28,22 @@ func TestReduce(t *testing.T) {
 		AssertEqual(t, Reduce([]string{"a", "b", "c"}, concatenate, ""), "abc")
 	})
 }
+
+func TestBadBank(t *testing.T) {
+	transactions := []Transaction{
+		{
+			From: "Justin",
+			To:   "Shay",
+			Sum:  100,
+		},
+		{
+			From: "Dave",
+			To:   "Justin",
+			Sum:  25,
+		},
+	}
+
+	AssertEqual(t, BalanceFor(transactions, "Shay"), 100.0)
+	AssertEqual(t, BalanceFor(transactions, "Justin"), -75.0)
+	AssertEqual(t, BalanceFor(transactions, "Dave"), -25.0)
+}
