@@ -30,20 +30,23 @@ func TestReduce(t *testing.T) {
 }
 
 func TestBadBank(t *testing.T) {
-	transactions := []Transaction{
-		{
-			From: "Justin",
-			To:   "Shay",
-			Sum:  100,
-		},
-		{
-			From: "Dave",
-			To:   "Justin",
-			Sum:  25,
-		},
+	var (
+		shay = Account{Name: "Shay", Balance: 100}
+		justin = Account{Name: "Justin", Balance: 75}
+		dave = Account{Name: "Dave", Balance: 200}
+
+		transactions = []Transaction{
+			NewTransaction(justin, shay, 100),
+			NewTransaction(dave, justin, 25),
+		}
+	)
+
+	newBalanceFor := func(account Account) float64 {
+		return NewBalanceFor(account, transactions).Balance
 	}
 
-	AssertEqual(t, BalanceFor(transactions, "Shay"), 100.0)
-	AssertEqual(t, BalanceFor(transactions, "Justin"), -75.0)
-	AssertEqual(t, BalanceFor(transactions, "Dave"), -25.0)
+	AssertEqual(t, newBalanceFor(shay), 200.0)
+	AssertEqual(t, newBalanceFor(justin), 0.0)
+	AssertEqual(t, newBalanceFor(dave), 175.0)
+	
 }
