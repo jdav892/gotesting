@@ -2,7 +2,9 @@ package numberarrays
 
 import (
 	"testing"
+	"strings"
 )
+
 
 func AssertEqual(t *testing.T, got, want interface{}) {
 	t.Helper()
@@ -59,6 +61,10 @@ func TestBadBank(t *testing.T) {
 }
 
 func TestFind(t *testing.T) {
+	type Person struct {
+	Name	string
+	}
+
 	t.Run(" first first even number", func(t *testing.T) {
 		numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 
@@ -67,5 +73,20 @@ func TestFind(t *testing.T) {
 		})
 		AssertTrue(t, found)
 		AssertEqual(t, firstEvenNumber, 2)
+	})
+
+	t.Run("Find the Strongest Lifter", func(t *testing.T) {
+		people := []Person{
+			{Name: "Justin Davila"},
+			{Name: "Darshay Blount"},
+			{Name: "Joshua Blackwell"},
+		}
+
+		king, found := Find(people, func(p Person) bool {
+			return strings.Contains(p.Name, "Justin")
+		})
+
+		AssertTrue(t, found)
+		AssertEqual(t, king, Person{Name: "Justin Davila"})
 	})
 }
