@@ -19,6 +19,15 @@ func Reduce[T, C any](collection []T, f func(C, T) C, initialValue C) C {
 	return result
 }
 
+func Find[T any](items []T, predicate func(T) bool) (value T, found bool) {
+	for _, v := range items {
+		if predicate(v) {
+			return v, true
+		}
+	}
+	return
+}
+
 func NewTransaction(from, to Account, sum float64) Transaction {
 	return Transaction{From: from.Name, To: to.Name, Sum: sum}
 }

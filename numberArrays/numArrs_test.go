@@ -11,6 +11,13 @@ func AssertEqual(t *testing.T, got, want interface{}) {
 	}
 }
 
+func AssertTrue(t *testing.T, got bool) {
+	t.Helper()
+	if !got {
+		t.Errorf("got %v want true", got)
+	}
+}
+
 func TestReduce(t *testing.T) {
 	t.Run("multiplication of all elements", func(t *testing.T) {
 		multiply := func(x, y int) int {
@@ -49,4 +56,16 @@ func TestBadBank(t *testing.T) {
 	AssertEqual(t, newBalanceFor(justin), 0.0)
 	AssertEqual(t, newBalanceFor(dave), 175.0)
 	
+}
+
+func TestFind(t *testing.T) {
+	t.Run(" first first even number", func(t *testing.T) {
+		numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+
+		firstEvenNumber, found := Find(numbers, func(x int) bool {
+			return x % 2 == 0
+		})
+		AssertTrue(t, found)
+		AssertEqual(t, firstEvenNumber, 2)
+	})
 }
